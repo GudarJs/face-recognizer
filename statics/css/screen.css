@@ -1,0 +1,46 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+    padding: 1rem;
+    background-color: #fefefe;
+    position: relative;
+}
+
+video {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+}
+
+nav {
+    margin-bottom: 1rem;
+}
+
+footer {
+    margin-top: 1rem; 
+}
+
+.dropdown-button {
+    display: flex;
+    margin-right: 1rem;
+}
+
+.dropdown-button i {
+    margin-left: 0.5rem;
+}
+
+.dropdown-content {
+    top: 45px !important;
+}
+
+.ion-camera {
+    position: absolute;
+    font-size: 3rem;
+    right: 1rem;
+    top: 1.2rem;
+}

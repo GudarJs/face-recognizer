@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<title>Face Recognizer - By GudarJs</title>
+		<!-- CSS -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+		
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/screen.css') }}">
+
+		<!-- Fonts -->
+		<link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
+	</head>
+	<body class="blue-grey lighten-5">
+		<ul id="camera_list" class="dropdown-content">
+			<li><a href="">1</a></li>
+		</ul>
+		<nav>
+			<div class="nav-wrapper blue darken-1">
+				<a href="#" class="brand-logo center">Face Recognizer</a>
+				<a class="dropdown-button right" href="#" data-activates="camera_list">Camera <i class="ion-arrow-down-b"></i></a>
+			</div>
+        </nav>
+        
+		<main class="container z-depth-1">
+            {% block content %}{% endblock %}
+		</main>
+		{% block sub_content %}{% endblock %}
+
+		<footer class="page-footer blue darken-1">
+			<div class="footer-copyright">
+				<div class="container">
+					<a class="grey-text text-lighten-4 right" href="https://github.com/gudarjs"><i class="ion-social-github"></i> Github GudarJs © 2017</a>
+				</div>
+			</div>
+		</footer>
+
+		<!-- JavaScript -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+		<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/locale/es.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+		
+		<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+	</body>
+</html>

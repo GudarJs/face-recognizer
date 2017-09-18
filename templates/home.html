@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+	<i class="ion-camera"></i>
+
+	<h4>Listado de eventos</h4>
+	<table id="events">
+		<thead>
+			<tr>
+				<th>Fecha</th>
+				<th>Nombre</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			{% for event in events %}
+				<tr>
+					<td>{{ event.date.strftime('%A, %d de %B de %Y %I:%M %p') }}</td>
+					<td>{{ event.name }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}
+
+{% block sub_content %}
+	<video id="videoTag" autoplay></video>
+	<canvas id="profilePicCanvas" style="display: none;"></canvas>
+{% endblock %}
