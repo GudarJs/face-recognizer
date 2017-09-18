@@ -1,6 +1,5 @@
 **/*.pyc
 database/database.db
-sdk/training/face_training.yml
 
 sdk/face_data/*
 !sdk/face_data/s1
