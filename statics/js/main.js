@@ -3,7 +3,7 @@
   var socket = io.connect(url);
 
   var videoArea = document.querySelector("video");
-  //var videoSelect = document.querySelector('#camera');
+  var videoSelect = $('#camera_list');
   var profilePicCanvas = document.querySelector("#profilePicCanvas");
   var videoTag = document.querySelector("#videoTag");
 
@@ -110,44 +110,44 @@
   function isValidName(name) {
     name = name.toLowerCase();
     numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-    return (name !== 'Desconocido' && !(name.startsWith('s') && numbers.includes(name.charAt(1)))) ? true : false;
+    return (name !== 'desconocido' && !(name.startsWith('s') && numbers.includes(name.charAt(1)))) ? true : false;
   }
 
   window.isValidName = isValidName;
 
   setInterval(takePhoto, 1000)
 
-  if (typeof MediaStreamTrack === 'undefined' || typeof MediaStreamTrack.getSources === 'undefined') {
-  //	document.querySelector("#cameraSelector").style.display="none";
-  } else {
-      MediaStreamTrack.getSources(getCameras);
-  }
+  $(document).on('click', '.cameraItem', function() {
+    startStream(this.getAttribute('data-videoSource'));
+  });
 
-  // videoSelect.onchange = startStream;
+  navigator.mediaDevices.enumerateDevices()
+  .then(getCameras).then(function() {}).catch(function() {});
+
+  function getCameras(deviceInfos) {
+    var cameraCount = 0;
+    for (var i = 0; i !== deviceInfos.length; ++i) {
+      var deviceInfo = deviceInfos[i];
+      if (deviceInfo.kind === 'videoinput') {
+        cameraCount++;
+        videoSelect.append(`<li class="cameraItem" data-videoSource="${deviceInfo.deviceId}"><a>${cameraCount}</a></li>`)
+      }
+    }
+  }
 
   startStream();
 
-  function getCameras(sourceInfos) {
-      for (var i = 0; i !== sourceInfos.length; ++i) {
-          var sourceInfo = sourceInfos[i];
-          var option = document.createElement('option');
-          option.value = sourceInfo.id;
-          if (sourceInfo.kind === 'video') {
-              //option.text = sourceInfo.label || 'camera ' + (videoSelect.length + 1);
-              //videoSelect.appendChild(option);
-          }
-      }
-  }
+  function startStream(videoSource) {
+    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
-  function startStream() {
-      navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-      //var videoSource = videoSelect.value;
-      var constraints = {
-          audio: false, 
-          video: true,
-      };
-      
-      navigator.getUserMedia(constraints, onSuccess, onError);
+    var constraints = {
+        audio: false, 
+        video: {
+            optional: [{ sourceId: videoSource }]
+        }
+    };
+
+    navigator.getUserMedia(constraints, onSuccess, onError);
   }
 
   function onSuccess(stream) {

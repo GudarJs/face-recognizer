@@ -27,7 +27,7 @@ class Events(db.Model):
     def __repr__(self):
         return '<User %r>' % self.name
 
-model = cv2.face.createLBPHFaceRecognizer()
+model = cv2.face.createEigenFaceRecognizer()
 model.load('sdk/training/face_training.yml')
 names = read_images()
 
@@ -63,4 +63,4 @@ def recive_streaming(frame_encoded):
     emit('face', face)
 
 if __name__ == '__main__':
-    socketio.run(app, log_output=True)
+    socketio.run(app, log_output=True, host= '0.0.0.0')

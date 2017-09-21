@@ -95,7 +95,7 @@ while samples < 50:
       break
 
 cv2.destroyAllWindows()
-model = cv2.face.createLBPHFaceRecognizer()
+model = cv2.face.createEigenFaceRecognizer()
 (images, labels) = read_images()
 model.train(images, labels)
 model.save('sdk/training/face_training.yml')
